@@ -1,0 +1,73 @@
+CREACION DE CRUD RAPIDO CON LARAVEL Y PHP
+
+PASO 1: ESCRIBE EN LA CONSOLA
+	PS C:\xampp\htdocs\composer> create-project laravel/laravel libreria
+
+PASO 2: CONFIGURAR LA BASE DE DATOS EN EL ARCHIVO .env
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+
+PASO 3: CREAR LA ABSE DE DATOS CON EL NOMBRE LARAVEL
+DataBase Name: laravel
+Character set: uft8mb4
+collation:	general_ci
+
+=== CREANDO LA TABLA PARA EL CRUD ===
+
+PASO 4: USAR LA MIGRACION, UBICANDOSE EN LA CARPETA DE PROYECTO ESCRIBIR
+	PS C:\xampp\htdocs\libreria> php artisan make:migration libros
+
+
+PASO 5: UBICARSE EN LA CARPETA C:\xampp\htdocs\libreria\database\migrations\libros.php y modificar el metodo up()
+public function up() Y GUARDAR!!! MUY IMPORTANTE!!
+    {
+        //
+        Schema::create('libros', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('precio');
+            $table->timestamps();
+        });
+    }
+PASO 6: ESCRIBE EL COMANDO
+	C:\xampp\htdocs\libreria> php artisan migrate
+
+=== integrar Bootstrap y Login ===
+PASO 7:ESCRIBER COMANDO
+	PS C:\xampp\htdocs\libreria> composer require laravel/ui
+	PS C:\xampp\htdocs\libreria> php artisan ui bootstrap --auth]
+
+OJO: ESTOS COMANDOS HACERLOS DOS VECES
+	PS C:\xampp\htdocs\libreria> npm install
+	PS C:\xampp\htdocs\libreria> npm run dev
+
+===  INSTALAR CRUD GENERATOR
+IR A: https://github.com/awais-vteams/laravel-crud-generator
+
+SEGUIR LOS PASOS:
+	1. PS C:\xampp\htdocs\libreria> composer require ibex/crud-generator --dev
+	2. PS C:\xampp\htdocs\libreria> php artisan vendor:publish --tag=crud
+	3. PS C:\xampp\htdocs\libreria> php artisan make:crud libros
+
+VERIFICAR LOS .blade.php creados en:
+	C:\xampp\htdocs\libreria\resources\views\libro
+
+VERIFICAR EL ARCHIVO EN:
+	//CONTROLADOR
+	C:\xampp\htdocs\libreria\app\Http\Controllers\LibroController.php
+	//MODELO
+	C:\xampp\htdocs\libreria\app\Models\Libro.php
+	//RUTAS
+	C:\xampp\htdocs\libreria\routes\web.php
+
+EDITAR EL ARCHIVO web.php
+	debajo de Auth::routes(); escribir
+	Route::resource('libros', App\Http\Controllers\LibroController::class);
+
+=== ALGUNOS AJUSTES
+
